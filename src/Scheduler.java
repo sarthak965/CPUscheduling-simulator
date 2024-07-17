@@ -10,9 +10,11 @@ import java.util.List;
 public class Scheduler {
     private static boolean isRunning = false;
     private JFrame frame;
+   
     private JComboBox<String> algorithmComboBox;
     private JTextArea processInfoArea;
     private JLabel currentProcessLabel;
+  
     private JLabel avgWaitingTimeLabel;
     private JLabel avgTurnaroundTimeLabel;
     private JLabel totalExecutionTimeLabel;
@@ -24,6 +26,8 @@ public class Scheduler {
     public Scheduler() {
         processes = new ArrayList<>();
         frame = new JFrame("CPU Scheduler");
+        
+        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
@@ -83,6 +87,7 @@ public class Scheduler {
                                 JLabel processLabel = new JLabel(name + " (Burst Time: " + burstTime + ")");
                                 processPanel.add(processLabel, BorderLayout.NORTH);
                                 processPanel.add(newProcess.progressBar, BorderLayout.CENTER);
+                           
                                 progressPanel.add(processPanel);
 
                                 progressPanel.revalidate();
@@ -98,6 +103,7 @@ public class Scheduler {
         topPanel.add(addButton);
 
         JButton startButton = new JButton("Start");
+       
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,6 +142,7 @@ public class Scheduler {
             }
         });
         topPanel.add(stopButton);
+        topPanel.setBackground(new Color(201, 243, 206, 127));
 
         JButton resetButton = new JButton("Reset");
         resetButton.addActionListener(new ActionListener() {
@@ -162,14 +169,19 @@ public class Scheduler {
         frame.add(topPanel, BorderLayout.NORTH);
 
         processInfoArea = new JTextArea(10, 30);
+       
         processInfoArea.setEditable(false);
-        frame.add(new JScrollPane(processInfoArea), BorderLayout.CENTER);
+     
+    
+        frame.add(new JScrollPane(processInfoArea),BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel(new GridLayout(4, 1));
+       // bottomPanel.setBackground(new Color(201, 243, 206, 127));
         currentProcessLabel = new JLabel("Current Process: ");
         avgWaitingTimeLabel = new JLabel("Average Waiting Time: ");
         avgTurnaroundTimeLabel = new JLabel("Average Turnaround Time: ");
         totalExecutionTimeLabel = new JLabel("Total Execution Time: ");
+
         bottomPanel.add(currentProcessLabel);
         bottomPanel.add(avgWaitingTimeLabel);
         bottomPanel.add(avgTurnaroundTimeLabel);
@@ -178,15 +190,18 @@ public class Scheduler {
 
         progressPanel = new JPanel();
         progressPanel.setLayout(new BoxLayout(progressPanel, BoxLayout.Y_AXIS));
+        progressPanel.setBackground(new Color(201, 243, 206, 127));
         frame.add(new JScrollPane(progressPanel), BorderLayout.SOUTH);
 
         processDetailsArea = new JTextArea(10, 30);
         processDetailsArea.setEditable(false);
-        processDetailsArea.setBackground(Color.WHITE);
+      //  processDetailsArea.setBackground(new Color(201, 243, 206, 127));
         frame.add(new JScrollPane(processDetailsArea), BorderLayout.WEST);
 
         frame.setVisible(true);
     }
+
+    
 
     public static boolean isRunning() {
         return isRunning;
